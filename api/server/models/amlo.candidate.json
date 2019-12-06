@@ -1,0 +1,19 @@
+{
+    "firstName"              : "Andrés Manuel",
+    "lastName"               : "Lopez Obrador",
+    "party"                  : "Movimiento Regeneración Nacional (MORENA)",
+    "description"            : "Andrés Manuel López Obrador (Tepetitán, Macuspana, Tabasco, 13 de noviembre de 1953) es un político, politólogo y escritor mexicano. Es fundador y militante del partido Movimiento Regeneración Nacional (Morena) y candidato a la presidencia de México por la coalición Juntos Haremos Historia",
+    "twitter_screenName"     : "@lopezobrador_",
+    "fb_screenName"          : "lopezobrador.org.mx",
+    "yt_screenName"          : "twitterobrador",
+    "totalTweets"            : 3205,
+    "negativeTweets"         : 1395,
+    "positiveTweets"         : 1810,
+    "positiveYoutubeComments" : 73,
+    "negativeYoutubeComments" : 27,
+    "favAverage"            : 979,
+    "analyzedVideoId"       : "-2DzEA5_DyQ",
+    "videoResults"          : [{"name": "Emotion Results", "Temeroso": 8, "Disgustado": 0, "Sorprendido": 0, "Triste": 24, "Feliz": 0, "Neutral": 303, "Enojado": 2}],
+    "topFaved"              : "Después de 20 días de campaña tengo tiempo para estar en la casa, y pegar estampitas que le traje a Jesús de la gira por el norte. https://t.co/sJlcKHpBPI",
+    "maxNumberFavs"         : 31424
+}

@@ -1,0 +1,19 @@
+{
+    "firstName"             : "Ricardo",
+    "lastName"              : "Anaya Cortés",
+    "party"                 : "Partido Acción Nacional (PAN)",
+    "description"           : "Ricardo Anaya Cortés (Santiago de Querétaro, México, 25 de febrero de 1979) es un político y abogado mexicano, militante del Partido Acción Nacional (PAN). Es candidato a la presidencia de México por la coalición Por México al Frente ",
+    "twitter_screenName"    : "@RicardoAnayaC",
+    "fb_screenName"         : "RicardoAnayaC",
+    "yt_screenName"         : "ricardoanayacortes",
+    "totalTweets"           : 3049,
+    "negativeTweets"        : 739,
+    "positiveTweets"        : 2310,
+    "favAverage"            : 325,
+    "positiveYoutubeComments" : 48,
+    "negativeYoutubeComments" : 52,
+    "analyzedVideoId"       : "R-zCU0CVYAI",
+    "videoResults"          : [{"name": "Emotion Results", "Feliz": 224, "Triste": 197, "Disgustado": 0, "Temeroso": 35, "Neutral": 130, "Enojado": 28, "Sorprendido": 4}],
+    "topFaved"              : "Cero y van cuatro y Andrés Manuel no contesta. Propuso la amnistía y ahora guarda silencio. ¿No veníamos a debatir?",
+    "maxNumberFavs"         : 38747
+}

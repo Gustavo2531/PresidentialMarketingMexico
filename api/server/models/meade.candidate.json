@@ -1,0 +1,20 @@
+{
+    "firstName"             : "José Antonio",
+    "lastName"              : "Meade Kuribreña",
+    "party"                 : "Partido Revolucionario Institucional (PRI)",
+    "description"           : "José Antonio Meade Kuribreña (Ciudad de México, 27 de febrero de 1969) es un político y economista mexicano. Es candidato a la presidencia de México en las elecciones federales de 2018 por la coalición Todos por México",
+    "twitter_screenName"    : "@JoseAMeadeK",
+    "fb_screenName"         : "JoseAMeadeK",
+    "yt_screenName"         : "UC9FhAVh9l",
+    "totalTweets"           : 3043,
+    "negativeTweets"        : 671,
+    "positiveTweets"        : 2372,
+    "favAverage"            : 647,
+    "positiveYoutubeComments" : 28,
+    "negativeYoutubeComments" : 32,
+    "analyzedVideoId"       : "xkJrKktfSdg",
+    "videoResults"          : [{"name": "Emotion Results", "Temeroso": 8, "Disgustado": 0, "Sorprendido": 0, "Triste": 24, "Feliz": 0, "Neutral": 303, "Enojado": 2}],
+    "topFaved"              : "Haciendo planas... https://t.co/tblo4MgFUF",
+    "maxNumberFavs"         : 17854
+
+}

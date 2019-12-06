@@ -1,0 +1,413 @@
+swagger: "2.0"
+info:
+  description: "Esta es la referencia de la REST API, se hace documentación de los endpoints de nuestra aplicacion"
+  version: "1.0"
+  title: "Candidatos API"
+  termsOfService: "https://opensource.org/licenses/MIT"
+  contact:
+    email: "ernestopm20@gmail.com"
+  license:
+    name: "MIT"
+    url: "https://opensource.org/licenses/MIT"
+host: "localhost:8005"
+basePath: "/api/v1"
+
+tags:
+
+- name: "candidatos"
+  description: "Lógica para extraer candidatos dados de alta en la base de datos"
+  
+- name: "discovery"
+  description: "Lógica para consultar la API REST de Watson y regresar los resultados"  
+  
+- name: "python"
+  description: "Wrapper simple que se encarga de ejecutar scripts de python"  
+
+schemes:
+- "http"
+
+paths:
+
+  /api/v1/candidates:
+    get:
+      tags:
+      - "candidatos"
+      summary: "Regresa TODOS los candidatos"
+      description: "Se hace una consulta a la base de datos que regresa todos los candidatos, adicionalmente se regresan personality insights en array ordenados por ids"
+      operationId: "consultCandidates"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Operación Exitosa"
+          schema:
+            title: "Cosa"
+            type: "object"
+            properties:
+              candidates:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Candidato"
+              personalityInsights:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Insights"
+              needsInsights:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Insights"
+              valuesInsights:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Insights"
+              consumptionPreferences:
+                type: "array"
+                items:
+                  $ref: "#/definitions/ConsumptionPreferences"
+        500:
+          description: "Error en el servidor" 
+      
+
+  /api/v1/candidate/{id}:
+    get:
+      tags:
+      - "candidatos"
+      summary: "Regresa UN candidato cuyo ID es proporcionado"
+      description: "Se hace una consulta a la base de datos que regresa el esquema completo del candidato con ese ID"
+      operationId: "consultCandidate"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: path
+          name: "id"
+          description: "El ID del candidato que se quiere consultar. AMLO = 1, Anaya = 2, Meade = 3"
+          required: true
+          type: "integer"
+            
+      responses:
+        400:
+          description: "Datos faltantes, probablemente falta el ID como parametro"
+      
+        200:
+          description: "Operación Exitosa"
+          schema:
+            $ref: "#/definitions/Candidato"
+        500:
+          description: "Error en el servidor" 
+          
+          
+  /api/v1/discovery/topStories:
+    post:
+      tags:
+      - "discovery"
+      summary: "Regresa las noticias mas importantes de la query"
+      description: "Se hace una consulta a la API de watson que regresa las mejores noticias de un parametro usado como query, por ejemplo 'AMLO' regresa las mejores noticias sobre AMLO"
+      operationId: "consultTopStories"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "query"
+          description: "Parametro usado como query, por ejemplo : AMLO"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        400:
+          description: "Datos faltantes, probablemente falta la query en el body"
+        200:
+          description: "Operación Exitosa"
+          schema:
+            title: "Cosa"
+            type: "object"
+            properties:
+              matching_results:
+                type: "integer"
+              results:
+                type: "array"
+                items:
+                  $ref: "#/definitions/TopStory"
+              duplicates_removed:
+                type: "integer"
+             
+        500:
+          description: "Error en el servidor"         
+  
+  /api/v1/discovery/newsSentimentAnalysis:
+    post:
+      tags:
+      - "discovery"
+      summary: "Regresa las noticias clasificadas por sentimiento"
+      description: "Se hace una consulta a la API de watson que regresa los sitios de noticias clasificados por emocion"
+      operationId: "consultNewsSentimentAnalysis"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "query"
+          description: "Parametro usado como query, por ejemplo : AMLO"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        400:
+          description: "Datos faltantes, probablemente falta la query en el body"
+        200:
+          description: "Operación Exitosa"
+          schema:
+            title: "Cosa"
+            type: "object"
+            properties:
+              results:
+                type: "array"
+                items:
+                  $ref: "#/definitions/SentimentAnalysis"
+             
+        500:
+          description: "Error en el servidor"     
+          
+  /api/v1/discovery/trendsAndAnomalies:
+    post:
+      tags:
+      - "discovery"
+      summary: "Regresa las noticias clasificadas en tendencias con anomalias"
+      description: "Se hace una consulta a la API de watson que regresa las menciones por dia analizando su tendencia y anomalias detectadas"
+      operationId: "consultTrends"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "query"
+          description: "Parametro usado como query, por ejemplo : AMLO"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        400:
+          description: "Datos faltantes, probablemente falta la query en el body"
+        200:
+          description: "Operación Exitosa"
+          schema:
+            title: "Cosa"
+            type: "object"
+            properties:
+              results:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Trends"
+             
+        500:
+          description: "Error en el servidor"  
+    
+  /api/v1/python/predictTweet:
+    post:
+      tags:
+      - "python"
+      summary: "Regresa el centroide al que pertenece el tweet pasado en el body"
+      description: "Se ejecuta el script en python para predecir ese tweet" 
+      operationId: "predictTweet"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+  
+      parameters:
+        - name: body 
+          in: body
+          description: "Contiene el tweet a predecir por ejemplo: Hola como estas y el frontendID de cada candidato"
+          required: true
+          schema:
+            $ref: '#/definitions/pythonBody'
+            
+      responses:
+        400:
+          description: "Datos faltantes, probablemente falta la query en el body"
+        200:
+          description: "Operación Exitosa"
+          schema:
+            title: "Cosa"
+            type: "object"
+            properties:
+              results:
+                type: "array"
+                items: {
+                  type: "string",
+                }
+             
+        500:
+          description: "Error en el servidor"          
+          
+definitions:
+
+  pythonBody:
+    type: "object"
+    properties:
+      tweet:
+        type: "string"
+      candidateFrontendId:
+        type: "string"
+  
+  Trends:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      total:
+        type: "number"
+      anomaly:
+        type: "number"
+
+      
+  SentimentAnalysis:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      positive:
+        type: "number"
+      negative:
+        type: "number"
+      neutral:
+        type: "number"
+
+  TopStory:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      score:
+        type: "integer"
+      host:
+        type: "string"
+      crawl_date:
+        type: "string"
+      title:
+        type: "string"
+      url:
+        type: "string"
+
+  ConsumptionPreferences:
+    type: "object"
+    properties:
+      1:
+        type: "array"
+        items: {
+          "type": "object"
+        }
+      2:
+        type: "array"
+        items: {
+          "type": "object"
+        }
+      3:
+        type: "array"
+        items: {
+          "type": "object"
+        }
+      4:
+        type: "array"
+        items: {
+          "type": "object"
+        }
+      5:
+        type: "array"
+        items: {
+          "type": "object"
+        }
+      6:
+        type: "array"
+        items: {
+          "type": "object"
+        }
+
+  Insights:
+    type: "object"
+    properties:
+      1:
+        type: "integer"
+        format: "int64"
+      2:
+        type: "integer"
+        format: "int64"
+      3:
+        type: "integer"
+        format: "int64"
+      4:
+        type: "integer"
+        format: "int64"
+      5:
+        type: "integer"
+        format: "int64"
+      6:
+        type: "integer"
+        format: "int64"
+      
+  Candidato:
+    type: "object"
+    properties:
+      frontendId:
+        type: "integer"
+        format: "int64"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      party:
+        type: "string"
+      description:
+        type: "string"
+      twitter_screenName:
+        type: "string"
+      fb_screenName:
+        type: "string"
+      yt_screenName:
+        type: "string"
+      totalTweets:
+        type: "integer"
+        format: "int64"
+      positiveTweets:
+        type: "integer"
+        format: "int64"
+      negativeTweets:
+        type: "integer"
+        format: "int64"
+      favAverage:
+        type: "integer"
+        format: "int64"
+      positiveYoutubeComments:
+        type: "integer"
+        format: "int64"
+      negativeYoutubeComments:
+        type: "integer"
+        format: "int64"
+      personalityInsights: 
+        type: "object"
+      personalityInsightsMentions: 
+        type: "object"
+      analyzedVideoId: 
+        type: "string"
+      videoEmotionResults:
+        type: "array"
+        items:
+          type: "string"
+      personalityInsightsPositiveMentions:
+        type: "object"
+      topFaved:
+        type: "string"
+      maxNumberFavs:
+        type: "integer"
+        format: "int64"
+  
+externalDocs:
+  description: "Aprende más sobre el proyecto"
+  url: "http://git.nearshoremx.com/catedra-computo/CCM/Mercadotecnia_Personal"
