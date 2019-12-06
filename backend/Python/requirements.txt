@@ -59,7 +59,7 @@ python-dateutil==2.6.1
 pytube==9.1.0
 pytz==2017.2
 pyzmq==16.0.2
-requests==2.18.4
+requests==2.20.0
 requests-oauthlib==0.8.0
 rope-py3k==0.9.4.post1
 scikit-learn==0.19.1
