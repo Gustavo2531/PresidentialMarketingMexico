@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async": "^2.6.0",
+    "async": "^2.6.4",
     "async-waterfall": "^0.1.5",
     "dotenv": "^5.0.0",
     "google-auth-library": "^1.4.0",
