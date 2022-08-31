@@ -15,7 +15,7 @@
     "google-auth-library": "^1.4.0",
     "googleapis": "^29.0.0",
     "moment": "^2.22.1",
-    "moment-timezone": "^0.5.16",
+    "moment-timezone": "^0.5.35",
     "twit": "^2.2.9",
     "twitter": "^1.7.1",
     "watson-developer-cloud": "^3.0.7"
